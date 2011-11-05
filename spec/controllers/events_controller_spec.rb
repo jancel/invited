@@ -91,7 +91,7 @@ describe EventsController do
       it "should create the new record" do
         Event.should_receive(:new).once
         @event.should_receive(:save).once
-        post :create, :event => {}
+        post :create, :event => { :name => "Special Event" }
       end
       
       it "should redirect response" do
