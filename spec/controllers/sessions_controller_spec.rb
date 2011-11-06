@@ -82,6 +82,8 @@ describe SessionsController do
         response.should be_success
         response.body.should have_json_path('user')
         response.body.should have_json_path('user/app_token')
+        response.body.should_not have_json_path('user/email')
+        response.body.should_not have_json_path('user/terms')
       end
       
       

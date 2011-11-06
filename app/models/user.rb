@@ -36,4 +36,14 @@ class User < ActiveRecord::Base
     end
     
   end
+  
+  def to_xml(options={})
+    options.merge!(:except => [:email, :terms])
+    super(options)
+  end
+  
+  def as_json(options={})
+    options.merge!(:except => [:email, :terms])
+    super(options)
+  end
 end
