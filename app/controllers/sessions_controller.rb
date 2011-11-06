@@ -22,6 +22,8 @@ class SessionsController < ApplicationController
     if User.email_exists?(email)
       # add device to user route
       # give user one hour to activate device
+      # when we get closer to supporting multiple
+      # devices, we will need to implement this
     else
       # add new user route
       @user = User.create_by_device(device, terms, email)

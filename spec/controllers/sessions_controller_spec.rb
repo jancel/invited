@@ -33,7 +33,7 @@ describe SessionsController do
         it "blank email responds with error" do
           failure_requirements_expectations
           post :device_activation,
-            :device_id => "device", 
+            :device_id => FactoryGirl.generate(:device_identifier), 
             :terms => true, 
             :format => 'json'
           response.should be_success
@@ -63,7 +63,7 @@ describe SessionsController do
       it "should require user to accept terms"  do
         post :device_activation, 
           :email => FactoryGirl.generate(:email), 
-          :device_id => "device", 
+          :device_id => FactoryGirl.generate(:device_identifier), 
           :terms => false, 
           :format => "json"
           response.should be_success
@@ -76,7 +76,7 @@ describe SessionsController do
         new_user_expectations
         post :device_activation, 
           :email => FactoryGirl.generate(:email), 
-          :device_id => "device", 
+          :device_id => FactoryGirl.generate(:device_identifier), 
           :terms => true, 
           :format => "json"
         response.should be_success
@@ -88,6 +88,28 @@ describe SessionsController do
     
       def new_user_expectations
         User.should_receive(:email_exists?).once
+      end
+      
+      describe "Duplicate device activation" do
+        it "should return errors for second device activation" do
+          User.stub!(:email_exists?).and_return(false)
+          device_id = FactoryGirl.generate(:device_identifier)
+          post :device_activation, 
+            :email => FactoryGirl.generate(:email), 
+            :device_id => device_id, 
+            :terms => true, 
+            :format => "json"
+          response.should be_success
+          response.body.should have_json_path('user')
+          response.body.should have_json_path('user/app_token')
+          post :device_activation, 
+            :email => FactoryGirl.generate(:email), 
+            :device_id => device_id, 
+            :terms => true, 
+            :format => "json"
+          response.should be_success
+          response.body.should have_json_path('errors/devices.identifier')
+        end
       end
     end
     
