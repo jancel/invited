@@ -43,6 +43,17 @@ Spork.prefork do
     config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
 
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :truncation
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
   end
   
   def auth
@@ -53,7 +64,15 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-
+  
+  #Factory girl as soon as I set 'r' up
+  FactoryGirl.reload
+  
+  # Models & class methods not loading each run (Gah)!
+  Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
+    load model
+  end
+  
 end
 
 # --- Instructions ---
