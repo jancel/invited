@@ -84,6 +84,7 @@ describe SessionsController do
         response.body.should have_json_path('user/app_token')
       end
       
+      
     
       def new_user_expectations
         User.should_receive(:email_exists?).once
