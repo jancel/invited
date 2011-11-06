@@ -1,0 +1,9 @@
+--output-dir doc/yard
+--title ANSI
+--protected
+lib/**/*.rb
+-
+doc/QED.rdoc
+LICENSE/*
+[A-Z][A-Z]*
+
