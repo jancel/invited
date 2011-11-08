@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20111105203941) do
     t.date     "start"
     t.date     "finish"
     t.text     "description"
+    t.boolean  "disabled",    :default => false
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

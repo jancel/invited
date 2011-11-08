@@ -17,6 +17,11 @@ If you can't figure out some things, checking out the below may help you get aro
 * Ruby on Rails Tutorial Book: http://www.railstutorial.org/
 
 
+== Client Rules
+
+1. To make a request to the server, you must set the User-Agent to: Device-app/app-version (where app-version is an identifier for the version of the app)
+	a. Device should be replaced with device type (Android, iPhone, iPad, iPod, Blackberry, etc.)
+
 == Debugging Rails
 
 Sometimes your application goes wrong. Fortunately there are a lot of tools that
