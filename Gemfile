@@ -43,6 +43,7 @@ group :development, :test do
   gem "json_spec"
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'ci_reporter'
 end
 
 group :test do

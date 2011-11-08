@@ -89,7 +89,7 @@ describe SessionsController do
       
     
       def new_user_expectations
-        User.should_receive(:email_exists?).once
+        # User.should_receive(:email_exists?).once
       end
       
       describe "Duplicate device activation" do

@@ -19,15 +19,15 @@ class SessionsController < ApplicationController
     email = params["email"]
     device = params["device_id"]
     terms = params["terms"]
-    if User.email_exists?(email)
+    # if User.email_exists?(email)
       # add device to user route
       # give user one hour to activate device
       # when we get closer to supporting multiple
       # devices, we will need to implement this
-    else
+    # else
       # add new user route
       @user = User.create_by_device(device, terms, email)
-    end
+    # end
     
     if @user.save
       respond_to do |format|

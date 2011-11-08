@@ -6,6 +6,8 @@ class CreateEvents < ActiveRecord::Migration
       t.date :start
       t.date :finish
       t.text :description
+      t.boolean :disabled, :default => false
+      t.integer :user_id
 
       t.timestamps
     end
