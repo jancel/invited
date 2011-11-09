@@ -16,6 +16,10 @@ If you can't figure out some things, checking out the below may help you get aro
 * The Getting Started Guide: http://guides.rubyonrails.org/getting_started.html
 * Ruby on Rails Tutorial Book: http://www.railstutorial.org/
 
+== Continuous Integration
+
+We have a jenkins server that will check on builds.  You can also sign up for an account if you become a regular contributor.  
+Right now, it only sends emails to the person that checked in a bad build.
 
 == Client Rules
 
