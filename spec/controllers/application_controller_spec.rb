@@ -9,7 +9,7 @@ describe ApplicationController do
   
   describe "other authentication" do
     it 'should auth device' do
-      
+      1.should eql 2
     end
   end
 end
