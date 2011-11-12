@@ -15,7 +15,7 @@ module Devise
         begin
           user = klass.authenticate_by_app_token_and_device_identifier(params['app_token'], params['device_id'])
 
-          if user.nil?
+          if user.nil? || user.class != klass
             fail!(failure_message)
           else
             success!(user)
@@ -28,8 +28,7 @@ module Devise
       
       protected
       def valid_params?
-        _params = params
-        _params['app_token'].present? && _params['device_id'].present?
+        params['app_token'].present? && params['device_id'].present?
       end
       
       def valid_headers?
