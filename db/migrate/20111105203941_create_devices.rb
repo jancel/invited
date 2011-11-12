@@ -3,7 +3,7 @@ class CreateDevices < ActiveRecord::Migration
     create_table :devices do |t|
       t.integer :user_id
       t.boolean :activated
-      t.string :identifier
+      t.text :identifier
       t.string :typel
       
       t.timestamps

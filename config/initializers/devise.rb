@@ -208,7 +208,7 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
   config.warden do |manager| 
-    manager.default_strategies.unshift :android
+    manager.default_strategies(:scope => :user).unshift :android_authenticatable
   end
 end
 

@@ -59,4 +59,12 @@ describe User do
       User.authenticate_by_app_token_and_device_identifier(user.app_token, "faker").should eql nil
     end
   end
+  
+  describe ".app_token" do
+    it "should be findable" do
+      @user = Factory(:user)
+      @user.app_token.should_not be_blank
+      User.find_by_app_token(@user.app_token).should eql(@user)
+    end
+  end
 end

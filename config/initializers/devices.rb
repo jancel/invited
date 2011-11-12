@@ -3,4 +3,4 @@ Dir["#{Rails.root}/lib/device/authorization/strategies/**/*authenticatable.rb"].
 end
 
 
-Warden::Strategies.add(:android, Devise::Strategies::AndroidAuthenticatable)
+Warden::Strategies.add(:android_authenticatable, Devise::Strategies::AndroidAuthenticatable)

@@ -13,6 +13,13 @@ class User < ActiveRecord::Base
   
   validates :terms, :acceptance => {:accept => true}
   
+  after_validation :generate_app_token
+  def generate_app_token
+    if self.app_token.blank?
+      self.app_token = Digest::MD5.hexdigest(self.email)
+    end
+  end
+  
   # Class methods
   class << self 
     
@@ -24,12 +31,11 @@ class User < ActiveRecord::Base
       require 'digest/sha2'
       
       #create the user
-      app_token = Digest::SHA512.hexdigest(device_id)
+      app_token = Digest::MD5.hexdigest(device_id)
       create(
         :password => app_token,
         :email => email,
         :terms => terms,
-        :app_token => app_token,
         :devices => [Device.create(:identifier => device_id, :activated => true)]
       )
       
