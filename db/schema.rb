@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(:version => 20111105203941) do
   create_table "devices", :force => true do |t|
     t.integer  "user_id"
     t.boolean  "activated"
-    t.text     "identifier"
+    t.string   "identifier"
     t.string   "typel"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20111105203941) do
     t.string   "last_sign_in_ip"
     t.string   "authentication_token"
     t.boolean  "terms"
-    t.text     "app_token"
+    t.string   "app_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

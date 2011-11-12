@@ -12,7 +12,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.token_authenticatable
 
       t.boolean :terms
-      t.text :app_token
+      t.string :app_token
 
       t.timestamps
     end
