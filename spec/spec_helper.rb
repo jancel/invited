@@ -71,7 +71,6 @@ Spork.each_run do
   Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
     load model
   end
-  
 end
 
 # --- Instructions ---

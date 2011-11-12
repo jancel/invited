@@ -1,9 +1,14 @@
 require 'spec_helper'
 
+HEADERS = { "HTTP_USER_AGENT" => "Android-app/1.0" }
+PARAMS = { :app_token => "123456", :device_id => FactoryGirl.generate(:device_identifier) }
+
 describe EventsController do
-  
   before(:each) do
     auth
+    
+    @user = Factory(:user)
+    sign_in @user
   end
 
   let(:event){ Event.create(:name => "fake Event") }

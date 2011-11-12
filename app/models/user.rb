@@ -35,6 +35,13 @@ class User < ActiveRecord::Base
       
     end
     
+    def authenticate_by_app_token_and_device_identifier(app_token, device_identifier)
+      user = find_by_app_token(app_token)
+      if user.devices.find_by_identifier_and_activated(device_identifier, true)
+        return user
+      end
+      nil
+    end
   end
   
   def to_xml(options={})

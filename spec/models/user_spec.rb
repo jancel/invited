@@ -45,4 +45,18 @@ describe User do
       user.should_not be_valid
     end
   end
+  
+  describe "authenticate_by_app_token_and_device_identifier(app_token, device_identifier)" do
+    it "should work for user" do
+      user = Factory(:user_with_device)
+      user.devices.count.should eql 1
+      User.authenticate_by_app_token_and_device_identifier(user.app_token, user.devices.first.identifier).should eql user
+    end
+    
+    it "should be nil uness authentic" do
+      user = Factory(:user_with_device)
+      user.devices.count.should eql 1
+      User.authenticate_by_app_token_and_device_identifier(user.app_token, "faker").should eql nil
+    end
+  end
 end
