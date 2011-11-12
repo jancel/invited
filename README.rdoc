@@ -9,7 +9,7 @@ to help you become more connected with everyone else.
 
 1. Checkout and download this project using the url for git.
 2. Project is configured for RVM, so go into the directory checked out and accept warnings.
-3. bundle install (once you are on the main branch)
+3. bundle install (once you are in the directory with .rvmrc activated)
 4. execute guard from the top level directory command prompt (type: guard)
 
 If you can't figure out some things, checking out the below may help you get around rails.
