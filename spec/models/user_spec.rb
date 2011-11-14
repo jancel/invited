@@ -62,9 +62,40 @@ describe User do
   
   describe ".app_token" do
     it "should be findable" do
-      @user = Factory(:user)
-      @user.app_token.should_not be_blank
-      User.find_by_app_token(@user.app_token).should eql(@user)
+      current_user.app_token.should_not be_blank
+      User.find_by_app_token(current_user.app_token).should eql(current_user)
     end
+    
+    it "should not change" do
+      original_token = current_user.app_token
+      original_token.should_not be_blank
+      current_user.email = FactoryGirl.generate(:email)
+      current_user.save
+      original_token.should eql current_user.app_token
+    end
+  end
+  
+  describe "associations" do
+    
+    describe "events" do
+      it "should have method events" do
+        current_user.events.should eql []
+      end
+      it "should allow user to create an event" do
+        current_user.events << Factory(:event)
+        current_user.events.count.should eql 1
+        current_user.events[0].id.should_not be_nil
+      end
+    end
+    
+    describe "devices" do
+      it "should have devices" do
+        current_user.devices.class.should eql Array
+      end
+    end
+  end
+  
+  def current_user
+    @user ||= Factory(:user)
   end
 end

@@ -11,13 +11,13 @@ class User < ActiveRecord::Base
   has_many :devices
   accepts_nested_attributes_for :devices
   
+  has_many :events
+
   validates :terms, :acceptance => {:accept => true}
   
   after_validation :generate_app_token
   def generate_app_token
-    if self.app_token.blank?
-      self.app_token = Digest::MD5.hexdigest(self.email)
-    end
+    self.app_token ||= Digest::MD5.hexdigest(self.email + Time.now.to_s)
   end
   
   # Class methods

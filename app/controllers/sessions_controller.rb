@@ -2,11 +2,27 @@ class SessionsController < ApplicationController
   attr :errors
   respond_to :xml, :json
   
+  before_filter :authenticate_user!, :only => :device_session
+  
+  def device_session
+    if signed_in?
+      respond_to do |f|
+        f.json { render :json => {"Success" => true} }
+        f.xml { render :xml =>  {"Success" => true} }
+      end
+    else
+      respond_to do |f|
+        f.json { render :json => {"Failed" => false} }
+        f.xml { render :xml => {"Failed" => false} }
+      end
+    end
+  end
+  
   def device_activation
     errors = [:device_id, :email, :terms].map { | arg | params[arg.to_s].blank? ? "#{arg.to_s} is a required field" : nil }.compact
 
     # user accepted terms?
-    errors << ["User must accept terms to use this application"] if !params["terms"]
+    errors << ["User must accept terms to use this application"] if params["terms"].blank?
     
     if !errors.blank?
       respond_to do |format|
@@ -30,6 +46,7 @@ class SessionsController < ApplicationController
     # end
     
     if @user.save
+      sign_in User, @user
       respond_to do |format|
         format.json { render :json => { :user => @user }}
         format.xml { render :json => { :user => @user }}

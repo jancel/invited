@@ -6,6 +6,7 @@ Invited::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
   match '/device_activation' => 'sessions#device_activation', :as => :device_activation
+  match '/device_session' => 'sessions#device_session', :as => :device_session
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
