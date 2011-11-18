@@ -1,10 +1,13 @@
 package com.invited;
 
+import org.json.JSONObject;
+
 import com.github.droidfu.activities.BetterDefaultActivity;
 import com.github.droidfu.concurrent.BetterAsyncTask;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -16,10 +19,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.provider.Settings.Secure;
 
-public class RegisterActivity extends BetterDefaultActivity implements OnClickListener 
+public class InvitedRegisterActivity extends BetterDefaultActivity implements OnClickListener 
 {
 	private String androidId;
 	public String[] values;
+	public String appToken;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -40,8 +44,7 @@ public class RegisterActivity extends BetterDefaultActivity implements OnClickLi
         CheckBox c;
         values = new String[4];
         
-        t = (EditText)findViewById(R.id.reg_fullname);
-        values[0] = t.getText().toString();
+        values[0] = androidId;
         
         t = (EditText)findViewById(R.id.reg_email);
         values[1] = t.getText().toString();
@@ -49,12 +52,44 @@ public class RegisterActivity extends BetterDefaultActivity implements OnClickLi
         c = (CheckBox)findViewById(R.id.acceptTOS);
         values[2] = new java.lang.Boolean(c.isChecked()).toString();
         
-        values[3] = androidId;
-	        
-	    InvitedRegisterAsyncTask<String, Void, Boolean> task = new InvitedRegisterAsyncTask<String, Void, Boolean>(getApplicationContext());
+        
+        t = (EditText)findViewById(R.id.reg_fullname);
+        values[3] = t.getText().toString();
+        
+        
+            
+	    InvitedAsyncTask task = new InvitedAsyncTask(getApplicationContext());
 	    task.disableDialog();
-	    task.execute(values[1],values[2],values[3]);
+	    task.execute(InvitedWebServiceURLs.registerUrl,values[0],values[1],values[2]);
+	
+	   
 	    
+	    //grab session if registration worked
+	    try
+	    {
+	    	InvitedAsyncTask createSessionTask=null;
+		    if(task.get()!=null)
+		    {
+		    	createSessionTask = new InvitedAsyncTask(getApplicationContext());
+			    createSessionTask.execute(InvitedWebServiceURLs.createSessionUrl,values[0],InvitedApplication.appToken);
+		    }
+		    
+		    
+		    if(createSessionTask.get()!=null)
+		    {
+		    	Intent i = new Intent(getApplicationContext(),InvitedActivity.class);
+				//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				getApplicationContext().startActivity(i);
+		    }
+	    }
+	    catch(Exception e)
+	    {
+	    	System.out.println(e.getStackTrace().toString());
+	    	//nothing
+	    }
+	    	
+	    	
+	 
 		
 		
 	}
