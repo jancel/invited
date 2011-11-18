@@ -1,5 +1,6 @@
 package com.invited;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -14,7 +15,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 public class InvitedActivity extends ListActivity {
     /** Called when the activity is first created. */
@@ -22,7 +25,7 @@ public class InvitedActivity extends ListActivity {
 	private SharedPreferences data;
 	private ArrayAdapter<InvitedEvents>adapter;
 	private String androidId;
-	private String appToken;
+
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,14 +40,18 @@ public class InvitedActivity extends ListActivity {
   			startActivity(intent);
   		else
   		{
-  			androidId = Secure.getString(getApplicationContext().getContentResolver(),Secure.ANDROID_ID);
+  		
   			InvitedAsyncTask task = new InvitedAsyncTask(getApplicationContext());
   		    task.disableDialog();
-  		    task.execute(InvitedWebServiceURLs.registerUrl,androidId,InvitedApplication.appToken);
+  		    task.execute("http://jancel.doesntexist.com:3000/events.json?device_id=easycheesy&app_token=5742a8d8cba21cd6a19acda585642c94","get");
   		    List<InvitedEvents> values=null;
+  		    Type listType = new TypeToken<List<InvitedEvents>>(){}.getType();
+  		  
   			Gson gson = new Gson();
-  			try {
-				values = (List<InvitedEvents>)gson.fromJson(task.get().toString(),values.getClass());
+  			try 
+  			{
+  				JSONObject j = task.get();
+				values = (List<InvitedEvents>)gson.fromJson(j.toString(),listType);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
