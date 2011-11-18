@@ -43,7 +43,7 @@ public class InvitedActivity extends ListActivity {
   		
   			InvitedAsyncTask task = new InvitedAsyncTask(getApplicationContext());
   		    task.disableDialog();
-  		    task.execute("http://jancel.doesntexist.com:3000/events.json?device_id=easycheesy&app_token=5742a8d8cba21cd6a19acda585642c94","get");
+  		    task.execute("http://jancel.doesntexist.com:3000/events.json","get");
   		    List<InvitedEvents> values=null;
   		    Type listType = new TypeToken<List<InvitedEvents>>(){}.getType();
   		  

@@ -55,14 +55,20 @@ public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> 
 		{
 			SharedPreferences data = context.getSharedPreferences("data", context.MODE_PRIVATE);
 			BetterHttp.setupHttpClient();
-			nameValuePairs.add(new BasicNameValuePair("device_id", data.getString("deviceId", "easycheesy")));
-			nameValuePairs.add(new BasicNameValuePair("app_token", data.getString("appToken", "5742a8d8cba21cd6a19acda585642c94")));
-			request = BetterHttp.post(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
-			response = request.send();
-			resp = response.getResponseBodyAsString();
+			
+			//means device has already been registered and just grabbing session
+			if(params[0]!=InvitedWebServiceURLs.registerUrl)
+			{
+				nameValuePairs.add(new BasicNameValuePair("device_id", data.getString("deviceId", "easycheesy1")));
+				nameValuePairs.add(new BasicNameValuePair("app_token", data.getString("appToken", "4de9eed1fe4e44963a30d9763b17f6fb")));
+				request = BetterHttp.post(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
+				response = request.send();
+				resp = response.getResponseBodyAsString();
+			}
 			
 		}
 		
+		//registering device automatically grabs session
 		if(params[0]==InvitedWebServiceURLs.registerUrl)
 		{
 			nameValuePairs.add(new BasicNameValuePair("device_id", params[2].toString()));
