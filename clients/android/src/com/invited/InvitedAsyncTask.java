@@ -24,9 +24,6 @@ import com.github.droidfu.http.BetterHttpResponse;
 
 public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> {
 
-	private SharedPreferences data;
-	private SharedPreferences.Editor dataEditor;
-
 	
 	public InvitedAsyncTask(Context arg0) {
 		super(arg0);
@@ -44,39 +41,56 @@ public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> 
 	@Override
 	protected JSONObject doCheckedInBackground(Context context, String... params) throws Exception {
 		
-		if(BetterHttp.getHttpClient()==null)
-			BetterHttp.setupHttpClient();
-		
-		String cred= (String)Base64.encodeToString(("test: ").getBytes(), Base64.DEFAULT);
+		String cred= (String)Base64.encodeToString(("test:").getBytes(), Base64.DEFAULT);
 		BetterHttp.setDefaultHeader("User-Agent", "Android");
 		BetterHttp.setDefaultHeader("Authorization", "Basic "+cred);
-
-		
+		BetterHttp.setDefaultHeader("Accept", "application/json");
+		BetterHttpRequest request;
+		BetterHttpResponse response;
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		String resp="";
 		
-		
-		if(params[0]==InvitedWebServiceURLs.registerUrl)
+		//sets up session 
+		if(BetterHttp.getHttpClient()==null)
 		{
-			nameValuePairs.add(new BasicNameValuePair("device_id", params[1].toString()));
-			nameValuePairs.add(new BasicNameValuePair("email", params[2].toString())); 
-			nameValuePairs.add(new BasicNameValuePair("terms", params[3].toString()));
+			SharedPreferences data = context.getSharedPreferences("data", context.MODE_PRIVATE);
+			BetterHttp.setupHttpClient();
+			nameValuePairs.add(new BasicNameValuePair("device_id", data.getString("deviceId", "easycheesy")));
+			nameValuePairs.add(new BasicNameValuePair("app_token", data.getString("appToken", "5742a8d8cba21cd6a19acda585642c94")));
+			request = BetterHttp.post(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
+			response = request.send();
+			resp = response.getResponseBodyAsString();
 			
 		}
 		
-		if(params[0]==InvitedWebServiceURLs.createSessionUrl)
+		if(params[0]==InvitedWebServiceURLs.registerUrl)
 		{
-			nameValuePairs.add(new BasicNameValuePair("device_id", params[1].toString()));
-			nameValuePairs.add(new BasicNameValuePair("app_token", params[2].toString()));
+			nameValuePairs.add(new BasicNameValuePair("device_id", params[2].toString()));
+			nameValuePairs.add(new BasicNameValuePair("email", params[3].toString())); 
+			nameValuePairs.add(new BasicNameValuePair("terms", params[4].toString()));
+			
 		}
 		
-		BetterHttpRequest post = BetterHttp.post(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
-		BetterHttpResponse response= post.send();
+		
+	
+		
+		
+		
+		String requestType = params[1].toString();
+		if(requestType=="post")
+			request = BetterHttp.post(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
+		else if(requestType=="get")
+			request = BetterHttp.get(params[0].toString());
+		else if(requestType=="put")
+			request = BetterHttp.put(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
+		else
+			request = BetterHttp.delete(params[0].toString());
+		
+		
+		request = BetterHttp.post(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
+		response= request.send();
 		String s = (String)response.getResponseBodyAsString();
 		
-		data = context.getSharedPreferences("data", context.MODE_PRIVATE);
-		dataEditor = data.edit();
-		dataEditor.putBoolean("isRegistered", true);
-		dataEditor.commit();
 		JSONObject object=null;
 		
 		try
@@ -87,7 +101,7 @@ public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> 
 		}
 		catch(Exception e)
 		{
-			object= (JSONObject) new JSONTokener("{name:'asdf'}").nextValue();
+			object= (JSONObject) new JSONTokener("{errors:'asdf'}").nextValue();
 		}
 		finally
 		{
