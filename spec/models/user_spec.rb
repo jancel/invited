@@ -95,6 +95,33 @@ describe User do
     end
   end
   
+  describe "deleting a user" do
+    it "should destroy all related events" do
+      u = Factory(:user_with_events_and_device)
+      u.destroy
+      Event.find_all_by_user_id(u.id).count.should eql 0
+    end
+    it "should destroy all related devices" do
+      u = Factory(:user_with_events_and_device)
+      u.destroy
+      Device.find_all_by_user_id(u.id).count.should eql 0
+    end
+  end
+  
+  describe "nested attributes" do
+    it "should accept attributes for device" do
+      lambda {
+        Factory(:user, :events_attributes => [{:name => "Hello"}])
+      }.should change(Event, :count).by(1)
+    end
+    
+    it "should accept nested attributes for event" do
+      lambda {
+        Factory(:user, :devices_attributes => [{:identifier => FactoryGirl.generate(:device_identifier)}])
+      }.should change(Device, :count).by(1)
+    end
+  end
+  
   def current_user
     @user ||= Factory(:user)
   end

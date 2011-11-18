@@ -8,10 +8,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, 
                   :remember_me, :token, :devices, :terms, :app_token
   
-  has_many :devices
+  has_many :devices, :dependent => :destroy
   accepts_nested_attributes_for :devices
   
-  has_many :events
+  has_many :events, :dependent => :destroy
+  accepts_nested_attributes_for :events
 
   validates :terms, :acceptance => {:accept => true}
   
