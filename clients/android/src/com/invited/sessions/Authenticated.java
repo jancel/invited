@@ -10,16 +10,16 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Base64;
 
 import com.github.droidfu.http.BetterHttp;
 import com.github.droidfu.http.BetterHttpRequest;
 import com.github.droidfu.http.BetterHttpResponse;
 
-public class Authenticated extends com.invited.InvitedApplication {
+public class Authenticated<T> extends com.invited.InvitedApplication {
 //	public Context context = getApplicationContext();
+	public final T klass;
+	public static final String format = ".json";
 	
 	static {
 		BetterHttp.setDefaultHeader("User-Agent", "Android");
@@ -45,7 +45,7 @@ public class Authenticated extends com.invited.InvitedApplication {
 			nameValuePairs.add(new BasicNameValuePair("app_token", "4de9eed1fe4e44963a30d9763b17f6fb"));
 			
 			try {
-				request = BetterHttp.post("http://jancel.doesntexist.com:3000/device_session",new UrlEncodedFormEntity(nameValuePairs));
+				request = BetterHttp.post("http://jancel.doesntexist.com:3000/device_session" + format,new UrlEncodedFormEntity(nameValuePairs));
 				response = request.send();
 				
 				if (response.getResponseBodyAsString().contains("success")){
@@ -64,6 +64,26 @@ public class Authenticated extends com.invited.InvitedApplication {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public Authenticated(T klass){
+		this.klass = klass;
+	}
+	
+	// Usage: Authenticated<Event> e = new Authenticated(new Event());??
+	// e.getAll(); // returns ArrayList of Events
+	// e.get(id); returns single Event with id
+	// etc.  One method for each of the different types we will be getting
+	
+	public List<T> getAll(){
+		// logic to get all of <Some Class>
+		klass.toString();
+		return new ArrayList<T>();
+	}
+	
+	public T get(String id){
+		// Logic to get a single whatever (i.e. event)
+		return null;
 	}
 	
 }
