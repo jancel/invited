@@ -5,8 +5,12 @@ log/*.log
 tmp/
 .sass-cache/
 
-clients/android/bin/Invited.apk
-clients/android/bin/classes/com/*.class
-clients/android/bin/resources.ap_
-clients/android/.classpath
+*.apk
+*.ap_
+*.dex
+*.class
 
+bin/
+gen/
+
+local.properties
