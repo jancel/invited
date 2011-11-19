@@ -72,7 +72,7 @@ public class InvitedRegisterActivity extends BetterDefaultActivity implements On
 	    
 	    try 
 	    {
-			JSONObject result = (JSONObject)task.get();
+			JSONObject result = new JSONObject(task.get());
 		
 			if (result.has("user"))
 			{

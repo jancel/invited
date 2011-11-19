@@ -23,7 +23,7 @@ import com.github.droidfu.http.BetterHttp;
 import com.github.droidfu.http.BetterHttpRequest;
 import com.github.droidfu.http.BetterHttpResponse;
 
-public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> {
+public class InvitedAsyncTask extends BetterAsyncTask<String, Void, String> {
 
 	
 	public InvitedAsyncTask(Context arg0) {
@@ -40,7 +40,7 @@ public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> 
 	
 	
 	@Override
-	protected JSONObject doCheckedInBackground(Context context, String... params) throws Exception {
+	protected String doCheckedInBackground(Context context, String... params) throws Exception {
 		
 		String cred= (String)Base64.encodeToString(("test:").getBytes(), Base64.DEFAULT);
 		BetterHttp.setDefaultHeader("User-Agent", "Android");
@@ -91,28 +91,13 @@ public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> 
 			request = BetterHttp.delete(params[0].toString());
 		
 		response= request.send();
-		String s = (String)response.getResponseBodyAsString();
+		resp = (String)response.getResponseBodyAsString();
 		
-		JSONObject object=null;
-		
-		try
-		{
-		
-		 object = (JSONObject) new JSONTokener(response.getResponseBodyAsString()).nextValue();
-		
-		}
-		catch(Exception e)
-		{
-			object= (JSONObject) new JSONTokener("{errors:'asdf'}").nextValue();
-		}
-		finally
-		{
-			return object;
-		}
+		return resp;
     }
 
 	@Override
-	protected void after(Context context, JSONObject jsonObject) 
+	protected void after(Context context, String jsonObject) 
 	{
 		// TODO Auto-generated method stub
 		Toast.makeText(context, "test", 10);

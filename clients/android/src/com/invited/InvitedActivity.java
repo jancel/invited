@@ -48,14 +48,12 @@ public class InvitedActivity extends ListActivity {
   		    task.disableDialog();
   		    task.execute("http://jancel.doesntexist.com:3000/events.json","get");
   		    Event[] values=null;
-  		    Event d=null;
   			Gson gson = new Gson();
   			try 
   			{
-  				JSONObject j = task.get();
-  				d = gson.fromJson(j.toString(),Event.class);
-  				values = new Event[1];
-  				values[0]=d;
+  				
+  				values = gson.fromJson(task.get(),Event[].class);
+  				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
