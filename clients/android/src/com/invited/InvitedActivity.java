@@ -1,6 +1,9 @@
 package com.invited;
 
+import com.invited.mappings.Event;
+
 import java.lang.reflect.Type;
+
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -23,7 +26,7 @@ public class InvitedActivity extends ListActivity {
     /** Called when the activity is first created. */
 	
 	private SharedPreferences data;
-	private ArrayAdapter<InvitedEvents>adapter;
+	private ArrayAdapter<Event>adapter;
 	private String androidId;
 
 	
@@ -44,14 +47,14 @@ public class InvitedActivity extends ListActivity {
   			InvitedAsyncTask task = new InvitedAsyncTask(getApplicationContext());
   		    task.disableDialog();
   		    task.execute("http://jancel.doesntexist.com:3000/events.json","get");
-  		    InvitedEvents[] values=null;
-  		    InvitedEvents d=null;
+  		    Event[] values=null;
+  		    Event d=null;
   			Gson gson = new Gson();
   			try 
   			{
   				JSONObject j = task.get();
-  				d = gson.fromJson(j.toString(),InvitedEvents.class);
-  				values = new InvitedEvents[1];
+  				d = gson.fromJson(j.toString(),Event.class);
+  				values = new Event[1];
   				values[0]=d;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -60,7 +63,7 @@ public class InvitedActivity extends ListActivity {
   		    
   			
   			
-  			adapter = new ArrayAdapter<InvitedEvents>(this,android.R.layout.simple_list_item_1,values);
+  			adapter = new ArrayAdapter<Event>(this,android.R.layout.simple_list_item_1,values);
   			
   			
   			setListAdapter(adapter);
