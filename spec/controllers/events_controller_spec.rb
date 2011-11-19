@@ -63,19 +63,17 @@ describe EventsController do
   describe "PUT 'update'" do   
     describe "successful" do
       before(:each) do
-        @event = mock_model(Event)
-        Event.stub!(:find).and_return(@event)
-        @event.stub!(:update_attributes).and_return(true)
+        @user.events << [Factory(:event), Factory(:event)]
+        @event = @user.events[0]
       end
       
       it "should call find method" do
-        Event.should_receive(:find).with("#{@event.id}").and_return(@event)
-        put :update, :id => @event, :event => {}
+        put :update, :id => @event, :event => { :name => "some_other_name"}
       end
       
       it "should update attributes" do
-        @event.should_receive(:update_attributes).and_return(true)
-        put :update, :id => @event, :event => {}
+        put :update, :id => @event, :event => { :name => "new_name" }
+        @user.events.find(@event.id).name.should eql "new_name"
       end
       
       it "should redirect response" do
@@ -102,6 +100,47 @@ describe EventsController do
       it "should redirect response" do
         post :create, :event => {} 
         response.should be_redirect
+      end
+    end
+  end
+  
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      
+    end
+    
+    it "should delete the event"
+    it "should redirect the response"
+    
+    describe "json" do
+      it "should return success"
+      it "should return failure"
+    end
+  end
+  
+  describe 'security' do
+    describe "a users events" do
+      describe "by unrelated other users" do
+        before(:each) do
+          @other_user = Factory(:user_with_events)
+        end
+        
+        it "should not readable" do
+          get 'index', :format => :json
+          response.should be_success
+          response.body.should be_json_eql("[]")
+        end
+        
+        it "should not be editable" do
+          lambda {
+            put :update, :id => @other_user.events[0].id, :event => { :name => "other_name" }, :format => :json
+          }.should raise_error
+        end
+        it "should not be deletable" do
+          lambda {
+            delete :destroy, :id => @other_user.events[0].id, :format => :json
+          }.should raise_error
+        end
       end
     end
   end

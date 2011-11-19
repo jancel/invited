@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   respond_to :html, :xml, :json
   
   def index
-    respond_with(@events = Event.all)
+    respond_with(@events = current_user.events.all)
   end
 
   def new
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   end
   
   def update
-    @event = Event.find params[:id]
+    @event = current_user.events.find params[:id]
     @event.update_attributes(params[:event])
     respond_with(@event)
   end
@@ -30,4 +30,8 @@ class EventsController < ApplicationController
     respond_with(@event = Event.find(params[:id]))
   end
 
+  def destroy
+    @event = current_user.events.find(params[:id]).destroy
+    respond_with(@event)
+  end
 end

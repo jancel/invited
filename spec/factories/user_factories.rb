@@ -18,4 +18,10 @@ FactoryGirl.define do
       u.events = [Factory(:event), Factory(:event)]
     end
   end
+  
+  factory :user_with_events, :parent => :user do
+    after_build do |u|
+      u.events = [Factory(:event), Factory(:event)]
+    end
+  end
 end
