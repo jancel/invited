@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.provider.Settings.Secure;
 
-public class InvitedRegisterActivity extends BetterDefaultActivity implements OnClickListener 
+public class RegisterActivity extends BetterDefaultActivity implements OnClickListener 
 {
 	private String androidId;
 	public String[] values;
@@ -68,7 +68,7 @@ public class InvitedRegisterActivity extends BetterDefaultActivity implements On
             
 	    InvitedAsyncTask task = new InvitedAsyncTask(getApplicationContext());
 	    task.disableDialog();
-	    task.execute(InvitedWebServiceURLs.registerUrl,"post",values[0],values[1],values[2]);
+	    task.execute(WebServiceURLs.registerUrl,"post",values[0],values[1],values[2]);
 	    
 	    try 
 	    {

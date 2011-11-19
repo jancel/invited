@@ -13,7 +13,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -22,20 +25,19 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-public class InvitedActivity extends ListActivity {
+public class EventListActivity extends ListActivity {
     /** Called when the activity is first created. */
 	
 	private SharedPreferences data;
 	private ArrayAdapter<Event>adapter;
-	private String androidId;
-
 	
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        Intent intent = new Intent(this,InvitedRegisterActivity.class);
+        Intent intent = new Intent(this,RegisterActivity.class);
   		data = this.getSharedPreferences("data", MODE_PRIVATE);
   		boolean isRegistered=data.getBoolean("isRegistered", false);
   		
@@ -60,18 +62,22 @@ public class InvitedActivity extends ListActivity {
 			}
   		    
   			
-  			
   			adapter = new ArrayAdapter<Event>(this,android.R.layout.simple_list_item_1,values);
   			
   			
   			setListAdapter(adapter);
-  			
-
-  			
-  			
-  			
-  			
+   			
   		}
   		
+    }
+    
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id)
+    {
+    	/*Intent i= new Intent(getApplicationContext(), NewActivity.class);
+    	i.putExtra("new_variable_name","value");
+    	startActivity(i);
+    	*/
+    
     }
 }
