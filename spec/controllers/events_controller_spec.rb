@@ -11,7 +11,7 @@ describe EventsController do
     sign_in @user
   end
 
-  let(:event){ Event.create(:name => "fake Event") }
+  let(:event){ Event.create(:name => "fake Event", :user_id => @user.id) }
   
   describe "GET 'index'" do
     it "returns http success" do
@@ -85,36 +85,61 @@ describe EventsController do
 
   describe "POST 'create'" do
     describe "successful" do
-      before(:each) do
-        @event = mock_model(Event)
-        @event.stub!(:save).and_return(@event)
-        Event.stub!(:new).and_return(@event)
-      end
-      
       it "should create the new record" do
-        Event.should_receive(:new).once
-        @event.should_receive(:save).once
-        post :create, :event => { :name => "Special Event" }
+        lambda {
+          post :create, :event => { :name => "Special Event" }
+        }.should change(Event, :count).by(1)
       end
       
       it "should redirect response" do
         post :create, :event => {} 
         response.should be_redirect
       end
+      
+      describe "json" do
+        it "should create for service" do
+          lambda {
+            post :create, :event => { :name => "Special Event" }, :format => :json
+            response.body.should have_json_path("name")
+          }.should change(Event, :count).by(1)
+        end
+      end
     end
   end
   
   describe "DELETE 'destroy'" do
     before(:each) do
-      
+      @user.events << [Factory(:event), Factory(:event)]
     end
     
-    it "should delete the event"
-    it "should redirect the response"
+    it "should delete the event" do
+      current_events_count = @user.events.count
+      lambda {
+        delete :destroy, :id => @user.events[0].id, :format => :json
+        @user.events.count.should eql current_events_count - 1
+      }.should_not raise_error
+      
+    end
+    it "should redirect the response" do
+      current_events_count = @user.events.count
+      lambda {
+        delete :destroy, :id => @user.events[0].id
+        @user.events.count.should eql current_events_count - 1
+        response.should be_redirect
+      }.should change(Event, :count).by(-1)
+    end
     
     describe "json" do
-      it "should return success"
-      it "should return failure"
+      it "should return empty json object" do
+        delete :destroy, :id => @user.events[0].id, :format => :json
+        response.body.should be_json_eql("{}")
+      end
+      it "should fail" do
+        lambda {
+          event = Factory(:event)
+          delete :destroy, :id => event.id, :format => :json
+        }.should raise_error
+      end
     end
   end
   

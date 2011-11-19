@@ -11,12 +11,11 @@ class EventsController < ApplicationController
   end
 
   def show
-    respond_with(@event ||= Event.find(params[:id]))
+    respond_with(@event ||= current_user.events.find(params[:id]))
   end
   
   def create
-    @event = Event.new(params[:event])
-    @event.save
+    @event = current_user.events.create(params[:event])
     respond_with(@event)
   end
   
@@ -27,7 +26,7 @@ class EventsController < ApplicationController
   end
 
   def edit
-    respond_with(@event = Event.find(params[:id]))
+    respond_with(@event = current_user.events.find(params[:id]))
   end
 
   def destroy
