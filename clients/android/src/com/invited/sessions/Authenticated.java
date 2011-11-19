@@ -16,9 +16,7 @@ import com.github.droidfu.http.BetterHttp;
 import com.github.droidfu.http.BetterHttpRequest;
 import com.github.droidfu.http.BetterHttpResponse;
 
-public class Authenticated<T> extends com.invited.InvitedApplication {
-//	public Context context = getApplicationContext();
-	public final T klass;
+public class Authenticated extends com.invited.InvitedApplication {
 	public static final String format = ".json";
 	
 	static {
@@ -66,24 +64,11 @@ public class Authenticated<T> extends com.invited.InvitedApplication {
 		}
 	}
 	
-	public Authenticated(T klass){
-		this.klass = klass;
-	}
 	
 	// Usage: Authenticated<Event> e = new Authenticated(new Event());??
 	// e.getAll(); // returns ArrayList of Events
 	// e.get(id); returns single Event with id
 	// etc.  One method for each of the different types we will be getting
 	
-	public List<T> getAll(){
-		// logic to get all of <Some Class>
-		klass.toString();
-		return new ArrayList<T>();
-	}
-	
-	public T get(String id){
-		// Logic to get a single whatever (i.e. event)
-		return null;
-	}
 	
 }
