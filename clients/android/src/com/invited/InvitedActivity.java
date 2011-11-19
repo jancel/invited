@@ -44,14 +44,15 @@ public class InvitedActivity extends ListActivity {
   			InvitedAsyncTask task = new InvitedAsyncTask(getApplicationContext());
   		    task.disableDialog();
   		    task.execute("http://jancel.doesntexist.com:3000/events.json","get");
-  		    List<InvitedEvents> values=null;
-  		    Type listType = new TypeToken<List<InvitedEvents>>(){}.getType();
-  		  
+  		    InvitedEvents[] values=null;
+  		    InvitedEvents d=null;
   			Gson gson = new Gson();
   			try 
   			{
   				JSONObject j = task.get();
-				values = (List<InvitedEvents>)gson.fromJson(j.toString(),listType);
+  				d = gson.fromJson(j.toString(),InvitedEvents.class);
+  				values = new InvitedEvents[1];
+  				values[0]=d;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

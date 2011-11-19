@@ -9,6 +9,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpParams;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import android.content.Context;
@@ -61,7 +62,7 @@ public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> 
 			{
 				nameValuePairs.add(new BasicNameValuePair("device_id", data.getString("deviceId", "easycheesy1")));
 				nameValuePairs.add(new BasicNameValuePair("app_token", data.getString("appToken", "4de9eed1fe4e44963a30d9763b17f6fb")));
-				request = BetterHttp.post(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
+				request = BetterHttp.post(InvitedWebServiceURLs.createSessionUrl,new UrlEncodedFormEntity(nameValuePairs));
 				response = request.send();
 				resp = response.getResponseBodyAsString();
 			}
@@ -77,10 +78,7 @@ public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> 
 			
 		}
 		
-		
 	
-		
-		
 		
 		String requestType = params[1].toString();
 		if(requestType=="post")
@@ -92,8 +90,6 @@ public class InvitedAsyncTask extends BetterAsyncTask<String, Void, JSONObject> 
 		else
 			request = BetterHttp.delete(params[0].toString());
 		
-		
-		request = BetterHttp.post(params[0].toString(),new UrlEncodedFormEntity(nameValuePairs));
 		response= request.send();
 		String s = (String)response.getResponseBodyAsString();
 		

@@ -19,6 +19,9 @@ public class InvitedEvents {
 	@Override
 	public String toString()
 	{
-		return this.name;
+		if(name!=null)
+			return this.name;
+		else
+			return this.id;
 	}
 }
