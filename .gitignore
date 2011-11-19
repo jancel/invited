@@ -10,7 +10,7 @@ tmp/
 *.dex
 *.class
 
-bin/
-gen/
+invited/clients/android/bin/
+invited/clients/android/gen/
 
-local.properties
+invited/clients/android/local.properties
