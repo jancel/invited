@@ -44,9 +44,7 @@ class User < ActiveRecord::Base
     
     def authenticate_by_app_token_and_device_identifier(app_token, device_identifier)
       user = find_by_app_token(app_token)
-      if user.devices.find_by_dev_id_and_activated(device_identifier, true)
-        return user
-      end
+      return user if user.devices.find_by_dev_id_and_activated(device_identifier, true)
       nil
     end
   end
