@@ -1,0 +1,6 @@
+development:
+  google_maps: a_key
+  google_places: a_key
+test:
+  google_maps: a_key
+  google_places: a_key

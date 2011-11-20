@@ -59,6 +59,12 @@ Spork.prefork do
     request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials("test","")
   end
 
+  def no_web &block
+    FakeWeb.allow_net_connect = false
+    yield block if block_given?
+    FakeWeb.allow_net_connect = true
+  end
+
 end
 
 Spork.each_run do
@@ -71,6 +77,11 @@ Spork.each_run do
   Dir["#{Rails.root}/app/models/**/*.rb"].each do |model|
     load model
   end
+  
+  Dir["#{Rails.root}/lib/**/*.rb"].each do |lib|
+    load lib
+  end
+  
 end
 
 # --- Instructions ---

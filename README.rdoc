@@ -43,6 +43,7 @@ When creating new functionality or fixing a bug, if you will, please use a topic
   git push
   git branch -d your_changes_description
 4. Get another change, and have at it!
+5. Most important, have a blast!
 
 == Debugging Rails
 

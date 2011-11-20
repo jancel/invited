@@ -47,6 +47,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'ci_reporter'
+  gem 'fakeweb'
 end
 
 group :test do

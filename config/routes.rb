@@ -8,6 +8,8 @@ Invited::Application.routes.draw do
   match '/device_activation' => 'sessions#device_activation', :as => :device_activation
   match '/device_session' => 'sessions#device_session', :as => :device_session
 
+  match '/places/:action', :controller => :google_places
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
