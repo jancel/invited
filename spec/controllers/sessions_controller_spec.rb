@@ -5,11 +5,6 @@ describe SessionsController do
     auth
   end
   
-  describe "failuer" do
-    it "should be a failure, to test hudson tracker" do
-     1.should eql 2
-    end
-  end
   describe "#device_session" do
     describe "success" do
       it "should allow device to establish a session" do
