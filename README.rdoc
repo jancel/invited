@@ -31,18 +31,18 @@ Right now, it only sends emails to the person that checked in a bad build.
 
 When creating new functionality or fixing a bug, if you will, please use a topic branch.  I'm sure you can get more info on Google.
 
-1. git checkout -b your_changes_description
-2. work, work, work, commit, work, commit, etc.
-3. when you are done and ready to go back to master:
-	a. git fetch origin
-	b. git rebase origin
-	c. git rebase -i # squash all of your topic commits into 1 commit for this entire topic
-	d. git checkout master
-	e. git merge your_changes_description
-	f. git log origin/master.. # validate that your commit is the one you want for topic
-	g. git push
-	h. git branch -d your_changes_description
-4. Get another change, and have at it!
+#1. git checkout -b your_changes_description
+#2. work, work, work, commit, work, commit, etc.
+#3. when you are done and ready to go back to master:
+  #a. git fetch origin
+  #b. git rebase origin
+  #c. git rebase -i # squash all of your topic commits into 1 commit for this entire topic
+  #d. git checkout master
+  #e. git merge your_changes_description
+  #f. git log origin/master.. # validate that your commit is the one you want for topic
+  #g. git push
+  #h. git branch -d your_changes_description
+#4. Get another change, and have at it!
 
 == Debugging Rails
 
