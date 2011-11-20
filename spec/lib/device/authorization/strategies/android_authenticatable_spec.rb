@@ -61,7 +61,7 @@ describe Devise::Strategies::AndroidAuthenticatable do
     end
     
     it "should authenticate android devices" do
-      user_hash = {'app_token' => @user.app_token, 'device_id' => @user.devices.first.identifier}
+      user_hash = {'app_token' => @user.app_token, 'device_id' => @user.devices.first.dev_id}
       @strategy.should_receive(:params).at_least(:once).and_return(user_hash)
 
       lambda {
@@ -75,7 +75,7 @@ describe Devise::Strategies::AndroidAuthenticatable do
     end
     
     it "should not authenticate on invalid data" do
-      user_hash = {'app_token' => "1234", 'device_id' => @user.devices.first.identifier}
+      user_hash = {'app_token' => "1234", 'device_id' => @user.devices.first.dev_id}
       @strategy.should_receive(:params).at_least(:once).and_return(user_hash)
       @strategy.authenticate!.should eql :failure
     end

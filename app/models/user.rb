@@ -37,14 +37,14 @@ class User < ActiveRecord::Base
         :password => app_token,
         :email => email,
         :terms => terms,
-        :devices => [Device.create(:identifier => device_id, :activated => true)]
+        :devices => [Device.create(:dev_id => device_id, :activated => true)]
       )
       
     end
     
     def authenticate_by_app_token_and_device_identifier(app_token, device_identifier)
       user = find_by_app_token(app_token)
-      if user.devices.find_by_identifier_and_activated(device_identifier, true)
+      if user.devices.find_by_dev_id_and_activated(device_identifier, true)
         return user
       end
       nil

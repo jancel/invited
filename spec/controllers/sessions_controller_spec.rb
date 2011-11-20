@@ -11,7 +11,7 @@ describe SessionsController do
         user = Factory(:user_with_device)
         request.env['HTTP_USER_AGENT'] = "Android-app/0.0"        
         post :device_session,
-          {:device_id => user.devices[0].identifier,
+          {:device_id => user.devices[0].dev_id,
           :app_token => user.app_token}
         session["warden.user.user.key"].should_not be_blank
         response.should_not be_redirect
@@ -21,7 +21,7 @@ describe SessionsController do
         user = Factory(:user_with_events_and_device) 
         request.env['HTTP_USER_AGENT'] = "Android-app/0.0"        
         post :device_session,
-          {:device_id => user.devices[0].identifier,
+          {:device_id => user.devices[0].dev_id,
           :app_token => user.app_token}
         
         lambda {
@@ -33,7 +33,7 @@ describe SessionsController do
       it "should not create a session" do
         user = Factory(:user_with_device)
         post :device_session,
-          {:device_id => user.devices[0].identifier,
+          {:device_id => user.devices[0].dev_id,
           :app_token => user.app_token}
         session["warden.user.user.key"].should be_blank
         response.should be_redirect
@@ -151,7 +151,7 @@ describe SessionsController do
             :terms => true, 
             :format => "json"
           response.should be_success
-          response.body.should have_json_path('errors/devices.identifier')
+          response.body.should have_json_path('errors/devices.dev_id')
         end
       end
     end

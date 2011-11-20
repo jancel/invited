@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(:version => 20111105203941) do
   create_table "devices", :force => true do |t|
     t.integer  "user_id"
     t.boolean  "activated"
-    t.string   "identifier"
+    t.string   "dev_id"
+    t.string   "app_id"
     t.string   "typel"
     t.datetime "created_at"
     t.datetime "updated_at"

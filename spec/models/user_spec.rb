@@ -50,7 +50,7 @@ describe User do
     it "should work for user" do
       user = Factory(:user_with_device)
       user.devices.count.should eql 1
-      User.authenticate_by_app_token_and_device_identifier(user.app_token, user.devices.first.identifier).should eql user
+      User.authenticate_by_app_token_and_device_identifier(user.app_token, user.devices.first.dev_id).should eql user
     end
     
     it "should be nil uness authentic" do
@@ -117,7 +117,7 @@ describe User do
     
     it "should accept nested attributes for event" do
       lambda {
-        Factory(:user, :devices_attributes => [{:identifier => FactoryGirl.generate(:device_identifier)}])
+        Factory(:user, :devices_attributes => [{:dev_id => FactoryGirl.generate(:device_identifier)}])
       }.should change(Device, :count).by(1)
     end
   end
