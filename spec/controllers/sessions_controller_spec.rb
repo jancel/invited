@@ -16,18 +16,6 @@ describe SessionsController do
         session["warden.user.user.key"].should_not be_blank
         response.should_not be_redirect
       end
-      it "should allow user to view events" do
-        pending "Move this test to an integration test"
-        user = Factory(:user_with_events_and_device) 
-        request.env['HTTP_USER_AGENT'] = "Android-app/0.0"        
-        post :device_session,
-          {:device_id => user.devices[0].dev_id,
-          :app_token => user.app_token}
-        
-        lambda {
-          get :controller => "events", :action => "index", :format => :json
-        }.should_not raise_error
-      end
     end
     describe "failure" do
       it "should not create a session" do
