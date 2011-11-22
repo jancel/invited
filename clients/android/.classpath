@@ -6,5 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="lib/droid-fu-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/library-3.4.2.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
