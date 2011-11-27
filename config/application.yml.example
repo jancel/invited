@@ -1,6 +1,6 @@
 development:
-  secret_token: abcdefghijklmnop
+  secret_token: abcdefg2340981094810928509108374hijklmnop
 test:
-  secret_token: abcdefghijklmnop
+  secret_token: ADAJKHkldASIDUfj324982504913kslfdkdfjlfjk
 production:
-  secret_token: place_your_secret_token_here
+  secret_token: place_your_secret_token_here_peeps

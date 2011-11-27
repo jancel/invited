@@ -49,7 +49,7 @@ describe Google::Places do
       @url.should_not be_blank
     end
     it "should be eql to" do
-      @url.should eql "https://maps.googleapis.com/maps/api/place/test/json?&key=AIzaSyD9o7rTS8GW9N5NIamcaqYmTl9y9g4WxA0&sensor=false"
+      @url.should match /https:\/\/maps.googleapis.com\/maps\/ap/
     end
     it "should default to json" do
       @url.should match /json\?/
