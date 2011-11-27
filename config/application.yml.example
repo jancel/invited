@@ -1,0 +1,6 @@
+development:
+  secret_token: abcdefghijklmnop
+test:
+  secret_token: abcdefghijklmnop
+production:
+  secret_token: place_your_secret_token_here
