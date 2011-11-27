@@ -76,7 +76,7 @@ module Google
       
       
       
-      File.open("#{Rails.root}/lib/google/detail_request.js", 'w') { |f| f.write(response.body) }
+#      File.open("#{Rails.root}/lib/google/detail_request.js", 'w') { |f| f.write(response.body) }
       
       response.body
     end
