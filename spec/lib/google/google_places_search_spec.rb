@@ -14,7 +14,7 @@ describe GooglePlacesSearch do
   it "should load proper params" do
     lambda {
       g = GooglePlacesSearch.new(:location => "123,321")
-      g.params.should eql "location=123,321&radius=4.02336"
+      g.params.should match /location=123\,321\&radius=/
     }.should_not raise_error
   end
   it "should fetch json from google" do
@@ -35,6 +35,15 @@ describe GooglePlacesSearch do
     # g.url.should eql "https://maps.googleapis.com/maps/api/place/search/json?location=123,321&radius=4.02336&keyword=test&name=Hello&types=one|two&language=EN&key=AIzaSyD9o7rTS8GW9N5NIamcaqYmTl9y9g4WxA0&sensor=false"
   end
 
+  it "should complete types request" do
+    params = {:location => "38,-90",:types => "restaurant|bar"}
+    g = GooglePlacesSearch.new(params)
+    g.should_receive(:get_data).and_return(FactoryGirl.generate(:get_places_json))
+    lambda {
+      g.get_data
+    }.should_not raise_error
+  end
+
   describe "#get_data" do
     it "should fetch json from google" do
       options = { :lat => "38.780348", :lon => "-90.563662" }
@@ -49,7 +58,6 @@ describe GooglePlacesSearch do
     it "should attempt to call google places" do
       options = { :lat => "38.780348", :lon => "-90.563662" }
       g = GooglePlacesSearch.new(options)
-      
       lambda {
         no_web {
           data = g.get_data

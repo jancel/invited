@@ -49,10 +49,10 @@ describe GooglePlacesSearch do
 
   describe "url" do
     it "should build params properly" do
-     GooglePlacesSearch.new(:location => "1,1").params.should eql "location=1,1&radius=4.02336"
+     GooglePlacesSearch.new(:location => "1,1").params.should match "location=1,1"
     end
     it "should be a good url" do
-      GooglePlacesSearch.new(:location => "1,1").url.should eql "https://maps.googleapis.com/maps/api/place/search/json?location=1,1&radius=4.02336&key=AIzaSyD9o7rTS8GW9N5NIamcaqYmTl9y9g4WxA0&sensor=false"
+      GooglePlacesSearch.new(:location => "1,1").url.should match /https:\/\/maps.googleapis.com\/maps\/api\/place\/search\/json\?location=1\,1/
     end
   end
 

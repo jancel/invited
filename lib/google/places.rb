@@ -1,7 +1,7 @@
 module Google
   module Places
     API_KEY = GOOGLE_CONFIG['google_places'].freeze unless defined? API_KEY
-    RADIUS = 4.02336.freeze  unless defined? RADIUS # 2.5 miles
+    RADIUS = 4023.36.freeze  unless defined? RADIUS # 2.5 miles
     FORMAT = "json".freeze  unless defined? FORMAT
 
     def initialize(options = {})
@@ -57,7 +57,7 @@ module Google
     def optional_params
       params_string = ""
       @options.each do |k, v|
-        params_string += "&#{k.to_s}=#{v}"
+        params_string += "&#{k.to_s}=#{v.gsub(/\|/,'%7C')}"
       end unless @options.blank?
       params_string
     end
