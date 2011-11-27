@@ -29,16 +29,12 @@ describe GooglePlacesDetails do
     g = GooglePlacesDetails.new(params)
     g.url.should match "EN"
     g.url.should match "test_reference"
-    # g.url.should eql "https://maps.googleapis.com/maps/api/place/search/json?location=123,321&radius=4.02336&keyword=test&name=Hello&types=one|two&language=EN&key=AIzaSyD9o7rTS8GW9N5NIamcaqYmTl9y9g4WxA0&sensor=false"
   end
 
   describe "#get_data" do
     it "should fetch json from google" do
       options = { :reference => "CnRqAAAAG04GO9yJ8TNFVFR6h2MT61FFyr6TYlqWXIxGqzXHNbJsqa2eTWzB-K03N5znaF7duHfGy0orhKtHn_nb58ZYN5suFEmr446qG-lwEElvjVTxQjia2fzo58x5ywDpgfMlxEHVhsVHz1ROa0K8SOaGJBIQgukAGSzUPrAbH9vhSWFstBoUWsLBWP1rHUVeDpgjjml5f7L7obc" }
       g = GooglePlacesDetails.new(options)
-      # FakeWeb.allow_net_connect = true
-      # Should there be major issues, and you need to debug the actual request, 
-      # comment out the mock method below.
       g.should_receive(:get_data).and_return(FactoryGirl.generate(:get_details_json))
       lambda {
         data = g.get_data
