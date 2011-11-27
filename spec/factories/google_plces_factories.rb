@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  sequence :place_reference do |n|
+    "some_place_reference_id_#{n}"
+  end
+
   sequence :location do |n| 
     "3#{n}.78,-9#{n}.564" 
   end

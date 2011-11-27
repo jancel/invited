@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111105203941) do
+ActiveRecord::Schema.define(:version => 20111127194906) do
 
   create_table "devices", :force => true do |t|
     t.integer  "user_id"
@@ -30,6 +30,27 @@ ActiveRecord::Schema.define(:version => 20111105203941) do
     t.date     "finish"
     t.text     "description"
     t.boolean  "disabled",    :default => false
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "vicinity"
+    t.float    "lat"
+    t.float    "lon"
+    t.string   "address"
+    t.string   "places_id"
+    t.string   "reference"
+    t.integer  "event_id"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country_code"
+    t.string   "url"
+    t.string   "icon"
+    t.string   "phone"
+    t.string   "i18n_phone"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
