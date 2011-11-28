@@ -1,6 +1,9 @@
 development:
   secret_token: abcdefg2340981094810928509108374hijklmnop
+  resque_pass: secret
 test:
   secret_token: ADAJKHkldASIDUfj324982504913kslfdkdfjlfjk
+  resque_pass: secret
 production:
   secret_token: place_your_secret_token_here_peeps
+  resque_pass: secret

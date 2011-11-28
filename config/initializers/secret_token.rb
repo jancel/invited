@@ -5,5 +5,5 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 #
-APP_CONFIG = YAML.load_file("#{Rails.root}/config/application.yml")[Rails.env]
+APP_CONFIG = YAML.load_file("#{Rails.root}/config/application.yml")[Rails.env] unless defined? APP_CONFIG
 Invited::Application.config.secret_token = APP_CONFIG["secret_token"]

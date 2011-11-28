@@ -12,6 +12,9 @@ to help you become more connected with everyone else.
 3. bundle install (once you are in the directory with .rvmrc activated)
 4. execute guard from the top level directory command prompt (type: guard)
 
+* We now have an instance of redis, please "brew install redis"
+* If you want to run on forman, please gem install foreman, execute foreman start to get going
+
 If you can't figure out some things, checking out the below may help you get around rails.
 * The Getting Started Guide: http://guides.rubyonrails.org/getting_started.html
 * Ruby on Rails Tutorial Book: http://www.railstutorial.org/

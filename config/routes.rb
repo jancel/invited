@@ -1,6 +1,9 @@
 Invited::Application.routes.draw do
   devise_for :users
 
+  # resque server
+  mount Resque::Server, :at => "/resque"
+
   resources :events
 
   # The priority is based upon order of creation:

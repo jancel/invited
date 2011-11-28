@@ -14,4 +14,28 @@ describe Location do
     @location.event_id.should eql @event.id
     @location.user_id.should eql @user.id
   end
+
+  describe "#from_places_hash" do
+    before(:each) do
+      @loc = Factory(:location)
+    end
+
+    it "should fail if no hash" do
+      lambda {
+        @loc.from_places_hash
+      }.should raise_error
+    end
+
+    it "should not fail if empty hash" do
+      lambda {
+        @loc.from_places_hash({})
+      }.should_not raise_error
+    end
+
+    it "should not fail with empty location" do
+      lambda {
+        @loc.from_places_hash({ :geometry => { "location" => "here"} })
+      }.should_not raise_error
+    end
+  end
 end
