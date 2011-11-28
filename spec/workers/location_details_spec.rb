@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe LocationDetails do
   before(:each) do
+    Resque.stub!(:enqueue).and_return(true)
     LocationDetails.stub!(:get_details).and_return(location_data)
   end
 
@@ -33,7 +34,7 @@ describe LocationDetails do
   end
 
   def location
-    @location ||= Location.create(:reference => FactoryGirl.generate(:place_reference))
+    @location ||= Location.create(:reference => "testing_real_reference")
   end
 
   def location_data

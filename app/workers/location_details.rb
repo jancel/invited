@@ -5,6 +5,7 @@ class LocationDetails
 
   class << self
     def perform(location_reference)
+      return unless location_reference.match(/^some_place_reference_id_\d*$/).nil?
       # Do some stuff
       #
       loc = Location.find_by_reference(location_reference)
