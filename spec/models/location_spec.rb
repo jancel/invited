@@ -5,7 +5,6 @@ describe Location do
     @user = Factory(:user_with_events) 
     @event = @user.events[0]
     LocationDetails.stub!(:get_details).and_return(FactoryGirl.generate(:get_details_json))
-    Resque.stub!(:enqueue).and_return(true)
   end
   
   it "should belong to a user" do

@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe Event do
-  before(:each) do
-    Resque.stub!(:enqueue).and_return(true)
-  end
   describe "create" do
     it "should not error" do
       lambda {

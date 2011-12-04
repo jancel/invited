@@ -50,6 +50,7 @@ Spork.prefork do
     config.before(:each) do
       DatabaseCleaner.start
       FakeWeb.allow_net_connect = false
+      Resque.stub!(:enqueue).and_return(true)
     end
 
     config.after(:each) do
