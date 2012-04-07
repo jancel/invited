@@ -14,7 +14,9 @@
         
         <activity
             android:label="@string/app_name"
-            android:name=".EventListActivity" >
+            android:name=".EventListActivity" 
+            android:theme="@style/Theme.Sherlock">
+            
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 

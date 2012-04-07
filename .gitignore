@@ -12,5 +12,5 @@ tmp/
 
 clients/android/bin/
 clients/android/gen/
-
+clients/ActionBarSherlock/
 clients/android/local.properties

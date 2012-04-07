@@ -14,13 +14,14 @@ import android.widget.ListView;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.actionbarsherlock.app.SherlockListActivity;
 import com.github.droidfu.activities.BetterListActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-public class EventListActivity extends BetterListActivity {
+public class EventListActivity extends SherlockListActivity {
     /** Called when the activity is first created. */
 	
 	private SharedPreferences data;
@@ -43,7 +44,7 @@ public class EventListActivity extends BetterListActivity {
   		
   			InvitedAsyncTask task = new InvitedAsyncTask(getApplicationContext());
   		    task.disableDialog();
-  		    task.execute("http://jancel.doesntexist.com:3000/events.json","get");
+  		    task.execute("http://192.168.1.110:3000/events.json","get");
   		    Event[] values=null;
   			Gson gson = new Gson();
   			try 
