@@ -1,7 +1,6 @@
 == Welcome to Invited
 
 Invited is an application envisioned to help ease the task of managing events, 
-to help you become more connected with everyone else.
 
 
 
