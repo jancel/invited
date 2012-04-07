@@ -2,7 +2,6 @@
 
 Invited is an application envisioned to help ease the task of managing events, 
 
-shams:
 
 == Getting Started
 
