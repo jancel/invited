@@ -1,6 +1,7 @@
 package com.invited;
 
 public class WebServiceURLs {
-	public static String registerUrl ="http://192.168.1.110:3000/device_activation";
-	public static String createSessionUrl ="http://192.168.1.110:3000/device_session";
+	public static String domain = "http://192.168.1.109:3000";
+	public static String registerUrl =domain+"/device_activation";
+	public static String createSessionUrl =domain+"/device_session";
 }

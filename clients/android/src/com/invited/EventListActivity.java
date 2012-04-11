@@ -3,9 +3,9 @@ package com.invited;
 import com.invited.InvitedAsyncTask;
 import com.invited.mappings.Event;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,6 +15,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.github.droidfu.activities.BetterListActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -26,6 +29,25 @@ public class EventListActivity extends SherlockListActivity {
 	
 	private SharedPreferences data;
 	private ArrayAdapter<Event>adapter;
+	private boolean isRegistered;
+   // set up actionbar buttons
+   @Override
+   public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.event_list, menu);
+        return true;
+    }
+    
+   // set up actions for buttons 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_new:	    Intent settingsActivity = new Intent(getBaseContext(),RegisterActivity.class);
+            						startActivity(settingsActivity);
+            						break;
+        }
+        return true;
+    }
 	
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -33,18 +55,28 @@ public class EventListActivity extends SherlockListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        Intent intent = new Intent(this,RegisterActivity.class);
+   
   		data = this.getSharedPreferences("data", MODE_PRIVATE);
-  		boolean isRegistered=data.getBoolean("isRegistered", false);
+  	    isRegistered=data.getBoolean("isRegistered", false);
   		
-  		if(!isRegistered)
+  		
+  		
+    }
+    
+    @Override
+    protected void onResume()
+    {
+    	super.onResume();
+        Intent intent = new Intent(this,RegisterActivity.class);
+        
+    	if(!isRegistered)
   			startActivity(intent);
   		else
   		{
   		
   			InvitedAsyncTask task = new InvitedAsyncTask(getApplicationContext());
   		    task.disableDialog();
-  		    task.execute("http://192.168.1.110:3000/events.json","get");
+  		    task.execute(WebServiceURLs.domain+"/events.json","get");
   		    Event[] values=null;
   			Gson gson = new Gson();
   			try 
@@ -64,8 +96,9 @@ public class EventListActivity extends SherlockListActivity {
   			setListAdapter(adapter);
    			
   		}
-  		
+    
     }
+    
     
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id)
