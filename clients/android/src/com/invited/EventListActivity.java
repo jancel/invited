@@ -42,7 +42,7 @@ public class EventListActivity extends SherlockListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_new:	    Intent settingsActivity = new Intent(getBaseContext(),RegisterActivity.class);
+            case R.id.menu_new:	    Intent settingsActivity = new Intent(getBaseContext(),CreateEvent.class);
             						startActivity(settingsActivity);
             						break;
         }

@@ -86,7 +86,8 @@ public class RegisterActivity extends BetterDefaultActivity implements OnClickLi
 			else
 				Toast.makeText(getApplicationContext(), "There was an error", Toast.LENGTH_SHORT);
 			
-			
+			Intent i = new Intent(this,EventListActivity.class);
+			startActivity(i);
 		
 		} 
 	    catch (Exception e) 
