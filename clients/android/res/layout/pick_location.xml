@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:apiKey="Your App Key Here"
+        android:apiKey="0h0URxiiayVWaKgvPRKCg-2LuT8nuJ6ZsS0Bh1w"
     />
     
 </RelativeLayout>
