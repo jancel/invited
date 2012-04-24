@@ -4,10 +4,16 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     
-
+	<EditText android:id="@+id/searchtext"
+	    	android:hint="Enter type or restaurant"
+	    	android:layout_width="fill_parent"
+       		android:layout_height="wrap_content"
+       		android:paddingTop="2dp"
+       		android:singleLine="true"
+	    />
 
 	 <com.google.android.maps.MapView
-	    android:layout_below="@+picklocation/search"
+	    android:layout_below="@+id/searchtext"
         android:id="@+id/mapview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
