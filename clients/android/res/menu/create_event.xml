@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/create_event_location"
+       android:title="Add Location" 
+       android:icon="@drawable/location_place"
+       android:showAsAction="always" />
+<item android:id="@+id/create_event_people"
+       android:title="Add Participants" 
+       android:icon="@drawable/social_add_group"
+       android:showAsAction="always" />
+<item android:id="@+id/create_event_save"
+       android:title="Save Event" 
+       android:icon="@drawable/content_save"
+       android:showAsAction="always" />
+</menu>
