@@ -14,6 +14,7 @@ public class Event implements Parcelable {
 	public String start;
 	public String disabled;
 	public String description;
+	public String reference;
 	
 	public Event(){}
 	
@@ -40,6 +41,7 @@ public class Event implements Parcelable {
 		dest.writeString(start);
 		dest.writeString(disabled);
 		dest.writeString(description);
+		dest.writeString(reference);
 	}
 	
 	public Event(Parcel in)
@@ -54,6 +56,7 @@ public class Event implements Parcelable {
 		start= in.readString();
 		disabled = in.readString();
 		description=in.readString();
+		reference = in.readString();
 	}
 	
 	 public static final Parcelable.Creator CREATOR =

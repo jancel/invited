@@ -82,13 +82,13 @@ public class RegisterActivity extends BetterDefaultActivity implements OnClickLi
 				dataEditor.putString("appToken", user.getString("app_token"));
 				dataEditor.putString("deviceId", androidId);
 				dataEditor.commit();	
+				
+				Intent i = new Intent(this,EventListActivity.class);
+				startActivity(i);
 			}
 			else
 				Toast.makeText(getApplicationContext(), "There was an error", Toast.LENGTH_SHORT);
 			
-			Intent i = new Intent(this,EventListActivity.class);
-			startActivity(i);
-		
 		} 
 	    catch (Exception e) 
 	    {

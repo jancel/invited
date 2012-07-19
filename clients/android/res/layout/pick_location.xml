@@ -8,7 +8,7 @@
 	    	android:hint="Enter type or restaurant"
 	    	android:layout_width="fill_parent"
        		android:layout_height="wrap_content"
-       		android:paddingTop="2dp"
+       		android:paddingTop="5dp"
        		android:singleLine="true"
 	    />
 
@@ -18,7 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:apiKey="0h0URxiiayVWaKgvPRKCg-2LuT8nuJ6ZsS0Bh1w"
+        android:apiKey="0h0URxiiayVVUhKnT-iCcijeWgWUPGzfMz4WnjQ"
     />
     
 </RelativeLayout>

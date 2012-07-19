@@ -57,8 +57,8 @@ public class EventListActivity extends SherlockListActivity {
         
    
   		data = this.getSharedPreferences("data", MODE_PRIVATE);
-  	    isRegistered=data.getBoolean("isRegistered", false);
-  		
+  	    //isRegistered=data.getBoolean("isRegistered", false);
+  		isRegistered=true;
   		
   		
     }
@@ -81,19 +81,18 @@ public class EventListActivity extends SherlockListActivity {
   			Gson gson = new Gson();
   			try 
   			{
-  				
-  				values = gson.fromJson(task.get(),Event[].class);
+  				String t = task.get();
+  				values = gson.fromJson(t,Event[].class);
   				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
   		    
+  	//		adapter = new ArrayAdapter<Event>(this,android.R.layout.simple_list_item_1,values);
   			
-  			adapter = new ArrayAdapter<Event>(this,android.R.layout.simple_list_item_1,values);
   			
-  			
-  			setListAdapter(adapter);
+  		//	setListAdapter(adapter);
    			
   		}
     

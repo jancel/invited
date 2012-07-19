@@ -7,60 +7,71 @@
 
   <RelativeLayout
       android:layout_width="fill_parent"
-      android:layout_height="wrap_content" >
+      android:layout_height="wrap_content"
+      android:padding="5dp" >
 
       <!-- Registration Form -->
 
       <LinearLayout
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:id="@+id/linearLayout1"
-          android:layout_width="match_parent"
+          android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical"
-          android:padding="10dip" >
+          android:padding="5dp"
+     	  android:layout_centerHorizontal="true"
+          >
 
-          <!-- Full Name Label -->
-
-          <!-- <TextView
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:text="Event Name" />  -->
-
-          <EditText
-              android:id="@+id/reg_fullname"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="20dip"
-              android:layout_marginTop="5dip"
-              android:hint="Event Name"
-              android:singleLine="true" />
-
-          <!-- Email Label -->
-
-          <TextView
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:text="Email" />
-
-          <EditText
-              android:id="@+id/reg_email"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="20dip"
-              android:layout_marginTop="5dip"
-              android:singleLine="true" />
-
-             <Button android:id="@+id/btnMap"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="10dip"
-                  android:text="Pick Location"/>
-          
-          
+      <EditText
+          android:id="@+id/reg_fullname"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="5dip"
+          android:layout_marginTop="5dip"
+          android:hint="Event Name"
+          android:singleLine="true" />
+      
+       <EditText
+          android:id="@+id/event_desc"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="5dip"
+          android:layout_marginTop="5dip"
+          android:hint="Event Description"
+          android:singleLine="false" />
+       
+       <LinearLayout android:id="@+id/event_layout" 
+                     android:layout_width="fill_parent"
+          			 android:layout_height="wrap_content"
+           			 android:orientation="vertical" >
+      
+	       <TextView android:id="@+id/event_loc_header"
+	          android:layout_width="fill_parent"
+	          android:layout_height="wrap_content"
+	          android:text="Location"
+	           />
+	       
+	       <TextView android:id="@+id/event_loc_placeholder"
+	          android:layout_width="fill_parent"
+	          android:layout_height="50dp"
+	          android:text=""
+	          android:padding="1dp"
+	          android:background="#FFFFFF"
+	           />
+	       
+       </LinearLayout>
+       <Button android:id="@+id/event_submit"
+            android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:text="Create"
+          />
+      
+   
+      
       </LinearLayout>
       <!-- Registration Form Ends -->
 
-    
+     
     
   </RelativeLayout>
 
